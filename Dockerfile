@@ -17,6 +17,12 @@ RUN printf 'Acquire::http::Proxy "%s";\nAcquire::https::Proxy "%s";\n' \
       "${http_proxy}" "${https_proxy}" \
       > /etc/apt/apt.conf.d/99proxy
 
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    libgl1 \
+    libglib2.0-0 \
+    libgomp1 \
+    && rm -rf /var/lib/apt/lists/*
+
 WORKDIR /app
 
 COPY requirements.txt .
