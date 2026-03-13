@@ -1,12 +1,7 @@
-FROM continuumio/miniconda3:latest
+FROM python:3.11-slim
 
 WORKDIR /app
 
-# Install pythonocc-core via conda-forge (not pip-installable)
-RUN conda install -y -c conda-forge pythonocc-core=7.8.1 && \
-    conda clean -afy
-
-# Install Python deps
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
